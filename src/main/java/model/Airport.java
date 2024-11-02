@@ -4,17 +4,17 @@ public class Airport {
     private Integer id;
     private String code;
     private String name;
-    private Integer cityId; // Assuming each airport is linked to a city by city ID
+    private City city; // Changed to hold a City object
 
     // No-argument constructor
     public Airport() {}
 
     // Constructor with parameters
-    public Airport(Integer id, String code, String name, Integer cityId) {
+    public Airport(Integer id, String code, String name, City city) {
         this.id = id;
         this.code = code;
         this.name = name;
-        this.cityId = cityId;
+        this.city = city;
     }
 
     // Getters and Setters
@@ -42,13 +42,10 @@ public class Airport {
         this.name = name;
     }
 
-    public Integer getCityId() {
-        return cityId;
-    }
+    public City getCity() { return city; }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
+
+    public void setCity(City city) { this.city = city; }
 
     // toString method for debugging or logging
     @Override
@@ -57,7 +54,7 @@ public class Airport {
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", cityId=" + cityId +
+                ", city=" + (city != null ? city.toString() : "null") + // Updated for better output
                 '}';
     }
 }
