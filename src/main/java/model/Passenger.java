@@ -1,10 +1,16 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Passenger {
     private Integer id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
+
+    private List<Aircraft> aircraftList = new ArrayList<>();
+    private Airport airport;
 
     // No-argument constructor
     public Passenger() {}
@@ -50,6 +56,28 @@ public class Passenger {
         this.phoneNumber = phoneNumber;
     }
 
+    // Method to return the full name
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
+    public List<Aircraft> getAircraftList() {
+        return aircraftList;
+    }
+
+    // New getter for airport
+    public Airport getAirport() {
+        return airport;
+    }
+
+    public void setAirport(Airport airport) {
+        this.airport = airport;
+    }
+
+    public Integer getAirportId() {
+        return airport != null ? airport.getId() : null; // Returns null if airport is not set
+    }
+
     // toString method for debugging or logging
     @Override
     public String toString() {
@@ -60,4 +88,5 @@ public class Passenger {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
+
 }
