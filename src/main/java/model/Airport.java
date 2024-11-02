@@ -5,16 +5,18 @@ public class Airport {
     private String code;
     private String name;
     private City city; // Changed to hold a City object
+    private String location;
 
     // No-argument constructor
     public Airport() {}
 
     // Constructor with parameters
-    public Airport(Integer id, String code, String name, City city) {
+    public Airport(Integer id, String code, String name, City city, String location) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.city = city;
+        this.location = location;
     }
 
     // Getters and Setters
@@ -46,6 +48,12 @@ public class Airport {
 
 
     public void setCity(City city) { this.city = city; }
+
+    public String getLocation() {
+        return location; }
+
+    public void setLocation(String location) {
+        this.location = location; }
 
     // toString method for debugging or logging
     @Override
