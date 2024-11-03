@@ -12,15 +12,20 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Client {
     private final String baseUrl;
     private final RestTemplate restTemplate;
 
-    public Client(String baseUrl) {
+    // Constructor that accepts a custom RestTemplate (for testing)
+    public Client(String baseUrl, RestTemplate restTemplate) {
         this.baseUrl = baseUrl;
-        this.restTemplate = new RestTemplate();
+        this.restTemplate = restTemplate;
+    }
+
+    // Default constructor for production
+    public Client(String baseUrl) {
+        this(baseUrl, new RestTemplate());
     }
 
     // Aircraft CRUD Operations
@@ -121,67 +126,5 @@ public class Client {
 
     public void deleteAirport(int id) {
         restTemplate.delete(baseUrl + "/airports/" + id);
-    }
-
-    // Main method with CLI
-    // Main method for user interaction (CLI)
-    public static void main(String[] args) {
-        Client client = new Client("http://localhost:8080/api");
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("\nSelect Entity:");
-            System.out.println("1. Aircraft");
-            System.out.println("2. Passenger");
-            System.out.println("3. City");
-            System.out.println("4. Airport");
-            System.out.println("0. Exit");
-            int entityChoice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
-
-            if (entityChoice == 0) break;
-
-            System.out.println("Choose Operation:");
-            System.out.println("1. View All");
-            System.out.println("2. View by ID");
-            System.out.println("3. Create");
-            System.out.println("4. Update");
-            System.out.println("5. Delete");
-            int operationChoice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
-
-            switch (entityChoice) {
-                case 1 -> handleAircraftOperations(client, scanner, operationChoice);
-                case 2 -> handlePassengerOperations(client, scanner, operationChoice);
-                case 3 -> handleCityOperations(client, scanner, operationChoice);
-                case 4 -> handleAirportOperations(client, scanner, operationChoice);
-                default -> System.out.println("Invalid choice.");
-            }
-        }
-
-        System.out.println("Exiting...");
-        scanner.close();
-    }
-
-    // Place the provided handle operations methods here, directly after the main method:
-
-    // Method to handle aircraft operations
-    private static void handleAircraftOperations(Client client, Scanner scanner, int operation) {
-        // Code as provided in the previous message
-    }
-
-    // Method to handle passenger operations
-    private static void handlePassengerOperations(Client client, Scanner scanner, int operation) {
-        // Code as provided in the previous message
-    }
-
-    // Method to handle city operations
-    private static void handleCityOperations(Client client, Scanner scanner, int operation) {
-        // Code as provided in the previous message
-    }
-
-    // Method to handle airport operations
-    private static void handleAirportOperations(Client client, Scanner scanner, int operation) {
-        // Code as provided in the previous message
     }
 }
