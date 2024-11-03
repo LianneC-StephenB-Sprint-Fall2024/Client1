@@ -1,10 +1,17 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aircraft {
     private Integer id;
     private String type;
     private String airlineName;
     private Integer numberOfPassengers;
+
+    private List<Passenger> passengers = new ArrayList<>();
+
+    private List<Airport> airports = new ArrayList<>();
 
     // No-argument constructor
     public Aircraft() {}
@@ -49,6 +56,19 @@ public class Aircraft {
     public void setNumberOfPassengers(Integer numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
     }
+
+    public List<Airport> getAirports() {
+        return airports;
+    }
+
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports; }
+
+    public List<Passenger> getPassengers() {
+        return passengers; }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers; }
 
     // toString method for debugging or logging
     @Override
