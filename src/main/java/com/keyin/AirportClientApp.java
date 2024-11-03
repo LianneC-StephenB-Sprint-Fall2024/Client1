@@ -56,26 +56,29 @@ public class AirportClientApp {
     }
 
     private void listAircraftPassengers() {
+        // Retrieve the list of all aircraft with their passengers
         List<Aircraft> aircraftList = client.getAllAircraft();
+
+        // Iterate through each aircraft and display its passengers
         aircraftList.forEach(aircraft -> {
             System.out.println("Aircraft: " + aircraft.getType() + " (Airline: " + aircraft.getAirlineName() + ")");
-            List<Passenger> passengers = client.getAllPassengers();
 
-            // Filter passengers based on whether they are in the aircraft's passenger list
-            passengers.stream()
-                    .filter(passenger -> passenger.getAircraftList().contains(aircraft))
-                    .forEach(passenger -> System.out.println(" - Passenger: " + passenger.getFirstName() + " " + passenger.getLastName()));
+            // Directly print passengers from each aircraft
+            aircraft.getPassengers().forEach(passenger ->
+                    System.out.println(" - Passenger: " + passenger.getFirstName() + " " + passenger.getLastName())
+            );
         });
     }
 
 
     private void listAircraftAirports() {
         List<Aircraft> aircraftList = client.getAllAircraft();
-        List<Airport> airports = client.getAllAirports();
 
         aircraftList.forEach(aircraft -> {
             System.out.println("Aircraft: " + aircraft.getType() + " has access to the following airports:");
-            airports.forEach(airport -> System.out.println(" - Airport: " + airport.getName()));
+            aircraft.getAirports().forEach(airport ->
+                    System.out.println(" - Airport: " + airport.getName())
+            );
         });
     }
 
