@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -47,17 +48,14 @@ class AirportClientAppTest {
                 new Airport(2, "LAX", "Los Angeles International", mockCities[1])
         };
 
-        // Mock the REST responses
         when(restTemplate.getForEntity(eq("http://localhost:8080/api/cities"), eq(City[].class)))
                 .thenReturn(new ResponseEntity<>(mockCities, HttpStatus.OK));
         when(restTemplate.getForEntity(eq("http://localhost:8080/api/airports"), eq(Airport[].class)))
                 .thenReturn(new ResponseEntity<>(mockAirports, HttpStatus.OK));
 
-        // Invoke the method to be tested
         app.listAirportsInCities();
 
-        // Verify and assert
-        assertEquals("New York", mockCities[0].getName(), "City name should match 'New York'");
+        assertEquals("New York", mockCities[0].getName());
     }
 
     @Test
@@ -78,8 +76,8 @@ class AirportClientAppTest {
 
         app.listAircraftPassengers();
 
-        assertEquals("TypeA", mockAircrafts[0].getType(), "Aircraft type should match 'TypeA'");
-        assertEquals("John", mockPassengers[0].getFirstName(), "Passenger first name should match 'John'");
+        assertEquals("TypeA", mockAircrafts[0].getType());
+        assertEquals("John", mockPassengers[0].getFirstName());
     }
 
     @Test
@@ -98,7 +96,7 @@ class AirportClientAppTest {
 
         app.listAircraftAirports();
 
-        assertEquals("JFK", mockAirports[0].getCode(), "Airport code should match 'JFK'");
+        assertEquals("JFK", mockAirports[0].getCode());
     }
 
     @Test
@@ -121,7 +119,7 @@ class AirportClientAppTest {
 
         app.listAirportsPassengersUsed();
 
-        assertEquals("JFK", mockAirports[0].getCode(), "First airport code should match 'JFK'");
-        assertEquals("LAX", mockAirports[1].getCode(), "Second airport code should match 'LAX'");
+        assertEquals("JFK", mockAirports[0].getCode());
+        assertEquals("LAX", mockAirports[1].getCode());
     }
 }
