@@ -26,6 +26,9 @@ public class Airport {
         this.name = name;
     }
 
+    public Airport(int i, String jfk, String s, City mockCity) {
+    }
+
     // Getters and Setters
     public Integer getId() {
         return id;

@@ -45,7 +45,7 @@ public class AirportClientApp {
         }
     }
 
-    private void listAirportsInCities() {
+    void listAirportsInCities() {
         System.out.println("\n---------------- List of the airports in cities  ----------------");
         List<City> cities = client.getAllCities();
         cities.forEach(city -> {
@@ -58,7 +58,7 @@ public class AirportClientApp {
         });
     }
 
-    private void listAircraftPassengers() {
+    void listAircraftPassengers() {
         System.out.println("\n---------------- List of passengers in aircrafts ----------------");
         // Retrieve the list of all aircraft with their passengers
         List<Aircraft> aircraftList = client.getAllAircraft();
@@ -75,7 +75,7 @@ public class AirportClientApp {
     }
 
 
-    private void listAircraftAirports() {
+    void listAircraftAirports() {
         System.out.println("\n---------------- List the aircrafts in airports  ----------------");
         List<Aircraft> aircraftList = client.getAllAircraft();
 
@@ -87,7 +87,7 @@ public class AirportClientApp {
         });
     }
 
-    private void listAirportsPassengersUsed() {
+    void listAirportsPassengersUsed() {
         System.out.println("\n---------------- List the airport passenger used ----------------");
         List<Passenger> passengers = client.getAllPassengers();
         passengers.forEach(passenger -> {
