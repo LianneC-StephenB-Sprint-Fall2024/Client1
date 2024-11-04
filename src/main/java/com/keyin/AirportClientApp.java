@@ -4,6 +4,7 @@ import model.Aircraft;
 import model.Passenger;
 import model.City;
 import model.Airport;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Scanner;
 import java.util.List;
@@ -11,8 +12,8 @@ import java.util.List;
 public class AirportClientApp {
     private final Client client;
 
-    public AirportClientApp(String baseUrl) {
-        this.client = new Client(baseUrl);
+    public AirportClientApp(String baseUrl, RestTemplate restTemplate) {
+        this.client = new Client(baseUrl, restTemplate);
     }
 
     public void run() {
@@ -107,7 +108,9 @@ public class AirportClientApp {
     }
 
     public static void main(String[] args) {
-        AirportClientApp app = new AirportClientApp("http://localhost:8080/api");
+        RestTemplate restTemplate = new RestTemplate();
+        AirportClientApp app = new AirportClientApp("http://localhost:8080/api", restTemplate);
+        // Run the application
         app.run();
-    }
 }
+    }

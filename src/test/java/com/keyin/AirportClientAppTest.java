@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -25,16 +24,13 @@ class AirportClientAppTest {
     @Mock
     private RestTemplate restTemplate;
 
-    @InjectMocks
-    private Client client;
-
     private AirportClientApp app;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        client = new Client("http://localhost:8080/api", restTemplate);
-        app = new AirportClientApp("http://localhost:8080/api");
+        // Instantiate the AirportClientApp with a base URL and mock RestTemplate
+        app = new AirportClientApp("http://localhost:8080/api", restTemplate);
     }
 
     @Test
@@ -44,8 +40,8 @@ class AirportClientAppTest {
                 new City(2, "Los Angeles", "CA", 4000000)
         };
         Airport[] mockAirports = {
-                new Airport(1, "JFK", "John F. Kennedy International", mockCities[0]),
-                new Airport(2, "LAX", "Los Angeles International", mockCities[1])
+                new Airport(1, "JFK", "John F. Kennedy International", mockCities[0], "New York"),
+                new Airport(2, "LAX", "Los Angeles International", mockCities[1], "Los Angeles")
         };
 
         when(restTemplate.getForEntity(eq("http://localhost:8080/api/cities"), eq(City[].class)))
@@ -53,8 +49,10 @@ class AirportClientAppTest {
         when(restTemplate.getForEntity(eq("http://localhost:8080/api/airports"), eq(Airport[].class)))
                 .thenReturn(new ResponseEntity<>(mockAirports, HttpStatus.OK));
 
+        // Call the method to test
         app.listAirportsInCities();
 
+        // Assertions to verify the output, if needed
         assertEquals("New York", mockCities[0].getName());
     }
 
