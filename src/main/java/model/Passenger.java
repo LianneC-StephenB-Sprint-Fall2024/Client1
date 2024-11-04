@@ -23,6 +23,9 @@ public class Passenger {
         this.phoneNumber = phoneNumber;
     }
 
+    public Passenger(int i, String john, String doe, String number, int i1) {
+    }
+
     // Getters and Setters
     public Integer getId() {
         return id;
