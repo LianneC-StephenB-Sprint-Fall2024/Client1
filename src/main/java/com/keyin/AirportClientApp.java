@@ -49,12 +49,16 @@ public class AirportClientApp {
     void listAirportsInCities() {
         System.out.println("\n---------------- List of the airports in cities  ----------------");
         List<City> cities = client.getAllCities();
+
+        // Retrieve all airports once to avoid multiple calls
+        List<Airport> airports = client.getAllAirports();
+
         cities.forEach(city -> {
             System.out.println("\nCity: " + city.getName());
 
-            List<Airport> airports = client.getAllAirports();
+            // Stream the airports list, filtering based on city ID
             airports.stream()
-                    .filter(airport -> airport.getCity().getId().equals(city.getId()))
+                    .filter(airport -> airport.getCity() != null && airport.getCity().getId().equals(city.getId()))
                     .forEach(airport -> System.out.println(" - Airport: " + airport.getName()));
         });
     }
