@@ -19,15 +19,17 @@ public class AirportClientApp {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Choose an option:");
+            System.out.println("\n----------------- International Airport Manager -----------------");
+            System.out.println("\nChoose an option:");
             System.out.println("1. List all airports in cities");
             System.out.println("2. List all aircraft passengers have traveled on");
             System.out.println("3. List airports aircraft can take off from and land at");
             System.out.println("4. List airports passengers have used");
             System.out.println("5. Exit");
-
+            System.out.println("\n-----------------------------------------------------------------");
+            System.out.println("\nType your option:");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+           // scanner.nextLine(); // Consume newline
 
             switch (choice) {
                 case 1 -> listAirportsInCities();
@@ -44,9 +46,10 @@ public class AirportClientApp {
     }
 
     private void listAirportsInCities() {
+        System.out.println("\n---------------- List of the airports in cities  ----------------");
         List<City> cities = client.getAllCities();
         cities.forEach(city -> {
-            System.out.println("City: " + city.getName());
+            System.out.println("\nCity: " + city.getName());
 
             List<Airport> airports = client.getAllAirports();
             airports.stream()
@@ -56,12 +59,13 @@ public class AirportClientApp {
     }
 
     private void listAircraftPassengers() {
+        System.out.println("\n---------------- List of passengers in aircrafts ----------------");
         // Retrieve the list of all aircraft with their passengers
         List<Aircraft> aircraftList = client.getAllAircraft();
 
         // Iterate through each aircraft and display its passengers
         aircraftList.forEach(aircraft -> {
-            System.out.println("Aircraft: " + aircraft.getType() + " (Airline: " + aircraft.getAirlineName() + ")");
+            System.out.println("\nAircraft: " + aircraft.getType() + " (Airline: " + aircraft.getAirlineName() + ")");
 
             // Directly print passengers from each aircraft
             aircraft.getPassengers().forEach(passenger ->
@@ -72,10 +76,11 @@ public class AirportClientApp {
 
 
     private void listAircraftAirports() {
+        System.out.println("\n---------------- List the aircrafts in airports  ----------------");
         List<Aircraft> aircraftList = client.getAllAircraft();
 
         aircraftList.forEach(aircraft -> {
-            System.out.println("Aircraft: " + aircraft.getType() + " has access to the following airports:");
+            System.out.println("\nAircraft: " + aircraft.getType() + " has access to the following airports:");
             aircraft.getAirports().forEach(airport ->
                     System.out.println(" - Airport: " + airport.getName())
             );
@@ -83,9 +88,10 @@ public class AirportClientApp {
     }
 
     private void listAirportsPassengersUsed() {
+        System.out.println("\n---------------- List the airport passenger used ----------------");
         List<Passenger> passengers = client.getAllPassengers();
         passengers.forEach(passenger -> {
-            System.out.println("Passenger: " + passenger.getFirstName() + " " + passenger.getLastName());
+            System.out.println("\nPassenger: " + passenger.getFirstName() + " " + passenger.getLastName());
             Integer airportId = passenger.getAirportId(); // Now you can call this method
             if (airportId != null) {
                 Airport airport = client.getAirportById(airportId);
